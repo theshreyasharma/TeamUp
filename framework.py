@@ -1,7 +1,13 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, request, render_template, url_for
 app = Flask(__name__)
 
 @app.route("/")
-@app.route("/home")
+@app.route("/home", methods=['POST'])
 def home():
-    return render_template("project-form.html")
+    if(request.method == 'POST'):
+        project_name = request.files['projectName']
+        project_description = request.values['projectDescription']
+        project_time = request.form['projectTime']
+        project_language = request.form['projectLanguages']
+            
+    return "render_template("")"

@@ -4,4 +4,4 @@
     -in order to make it easy, pipenv is used for automatically keeping track of dependencies
         -MAKE SURE TO HAVE pipenv INSTALLED (JUST FOLLOW DOCUMENTATION ON THEIR WEBSITE)
 2. Run the following: bash start.sh
-    -This should run the server and the local host id should be in the terminal so just ctrl-click on it
+    -This should run the server and the local host id should be in the terminal so just ctrl-click on itjkf
