@@ -20,19 +20,19 @@
       <div class="card-body">
         <h4 class="card-title">Submit a Project</h5>
         <p class="card-text">Share information about your project with potential teammates.</p>
-        <form>
+        <form action = "/home" method = 'POST'>
             <div class="form-group col-xs-4">
               <label for="projectName"><b>Project Name</b></label>
-              <input class="form-control col-xs-4" id="projectName" placeholder="Enter project name">
+              <input class="form-control col-xs-4" id="projectName" name="projectName" placeholder="Enter project name">
             </div>
             <div class="form-group col-xs-4">
                 <label for="projectDescription"><b>Description</b></label>
-                <textarea class="form-control col-xs-4" id="projectName" aria-describedby="descHelp" placeholder="Enter description"></textarea>
+                <textarea class="form-control col-xs-4" id="projectDescription" name="projectDescription" aria-describedby="descHelp" placeholder="Enter description"></textarea>
                 <small class="text-muted" id="descHelp">Provide as much detail as possible about your project, its MVP <i>(Minimum Viable Product)</i>, and its current progress.</small>
             </div>
             <div class="form-group col-xs-4">
                 <label for="projectTime"><b>Delivery Timeline</b></label>
-                <select class="form-control" id="projectTime">
+                <select class="form-control" id="projectTime" name="projectTime">
                     <option>Less than 1 week</option>
                     <option>1-4 weeks</option>
                     <option>4-8 weeks</option>
@@ -51,38 +51,38 @@
                     <div id="projectLanguages" class="col-sm">
                       <label for="projectLanguages">Languages</label>
                       <div class="w-100"></div>
-                      <input class="form-check-input" type="checkbox" value="" id="java">
+                      <input class="form-check-input" type="checkbox" value="" id="java" name="projectLanguages">
                       <label class="form-check-label" for="java">
                         Java
                       </label>
                       <div class="w-100"></div>
-                      <input class="form-check-input" type="checkbox" value="" id="javascript">
+                      <input class="form-check-input" type="checkbox" value="" id="javascript" name="projectLanguages">
                       <label class="form-check-label" for="javascript">
                         JavaScript
                       </label>
                       <div class="w-100"></div>
-                      <input class="form-check-input" type="checkbox" value="" id="c">
+                      <input class="form-check-input" type="checkbox" value="" id="c" name="projectLanguages">
                       <label class="form-check-label" for="c">
                         C/C++
                       </label>
                       <div class="w-100"></div>
-                      <input class="form-check-input" type="checkbox" value="" id="python">
+                      <input class="form-check-input" type="checkbox" value="" id="python" name="projectLanguages">
                       <label class="form-check-label" for="python">
                         Python
                       </label>
                       <div class="w-100"></div>
-                      <input class="form-check-input" type="checkbox" value="" id="c#">
+                      <input class="form-check-input" type="checkbox" value="" id="c#" name="projectLanguages">
                       <label class="form-check-label" for="c#">
                         C#
                       </label>
                       <div class="w-100"></div>
-                      <input class="form-check-input" type="checkbox" value="" id="swift">
+                      <input class="form-check-input" type="checkbox" value="" id="swift" name="projectLanguages">
                       <label class="form-check-label" for="swift">
                         Swift
                       </label>
                       <div class="w-100"></div>
                       <div class="col-xs-2">
-                        <input class="form-control col-xs-2" id="other_programming_language" placeholder="Other">
+                        <input class="form-control col-xs-2" id="other_programming_language" placeholder="Other" name="projectLanguages">
                       </div>
                     </div>
                   </div>
