@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>View Projects</title>
   <meta charset="utf-8">
@@ -8,33 +9,27 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
+
 <body>
 
-<div class="jumbotron text-center">
-  <h1>TeamUp!</h1>
-  <h3>View Projects</h3> 
-</div>
-  
-<div class="container">
-  <div class="row">
-    <div class="card">
-      <h3>Project Title</h3>
-      <p>Project information, current contributors.</p>
-      <p>Any other pertinent details.</p>
-    </div>
-    <div class="project2">
-      <h3>Project Title</h3>
-      <p>Project information, current contributors.</p>
-      <p>Any other pertinent details.</p>
-    </div>
-    <div class="project3">
-      <h3>Project Title</h3>        
-      <p>Description of Project</p>
-      <p>Project information, current contributors.</p>
-      <p>Any other pertinent details.</p>
+  <div class="jumbotron text-center">
+    <h1>TeamUp!</h1>
+    <h3>View Projects</h3>
+  </div>
+
+  <div class="container">
+    <div class="row">
+    {% for project in projects %}
+      <div class="card">
+        <h3>{{ project.project_name }}</h3>
+        <p>{{ project.project_description }}.</p>
+        <p>{{ project.project_language }}</p>
+      </div>
+    {% endfor %}
     </div>
   </div>
-</div>
+  </div>
 
 </body>
+
 </html>
