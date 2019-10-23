@@ -76,4 +76,14 @@ def projects():
 def submit():
     return render_template("project-form.html")
 
-    
+
+@app.route("/details", methods=['GET'])
+def details():
+    return redirect(url_for("individual"))
+
+
+@app.route("/individual")
+def individual():
+    if(request.method == 'GET'):
+        print("Button")
+    return render_template("individual-project.html")
