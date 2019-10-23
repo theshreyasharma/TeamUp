@@ -10,7 +10,7 @@ def home():
         project_description = request.form['projectDescription']
         project_time = request.form['projectTime']
         project_language = request.form['projectLanguages']
-
+        #details(project_name, project_description, project_time, project_language)
     return redirect(url_for("projects"))
 
 
@@ -22,3 +22,15 @@ def projects():
 @app.route("/submit")
 def submit():
     return render_template("project-form.html")
+
+
+@app.route("/details", methods=['GET'])
+def details():
+    return redirect(url_for("individual"))
+
+
+@app.route("/individual")
+def individual():
+    if(request.method == 'GET'):
+        print("Button")
+    return render_template("individual-project.html")
