@@ -21,9 +21,12 @@
     <div class="row">
     {% for project in projects %}
       <div class="card">
-        <h3>{{ project.project_name }}</h3>
-        <p>{{ project.project_description }}.</p>
-        <p>{{ project.project_language }}</p>
+        <!-- #Name-->
+        <h3>{{ project[0] }}</h3>
+        <!-- #Desc-->
+        <p>{{ project[2] }}.</p>
+        <!-- #Time-->
+        <p>{{ project[1] }}</p>
       </div>
     {% endfor %}
     </div>
