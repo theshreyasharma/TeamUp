@@ -34,3 +34,4 @@ def individual():
     if(request.method == 'GET'):
         print("Button")
     return render_template("individual-project.html")
+
