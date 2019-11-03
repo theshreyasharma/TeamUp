@@ -1,4 +1,6 @@
 from flask import Flask, request, render_template, url_for, redirect
+import mysql.connector
+from mysql.connector import Error
 app = Flask(__name__)
 
 @app.route("/")
@@ -10,13 +12,64 @@ def home():
         project_description = request.form['projectDescription']
         project_time = request.form['projectTime']
         project_language = request.form['projectLanguages']
-        #details(project_name, project_description, project_time, project_language)
+
+        # TEMPORARILY REMOVED OWNER ID TO TEST CONNECTION
+        # ADD BACK WHEN USERS IMPLEMENTED
+        query = "INSERT INTO project(project_name,project_time,project_description,project_language)" \
+                "VALUES(%s,%s,%s,%s)"
+        args = (project_name, project_time, project_description, project_language)
+
+        conn = None
+        try:
+            conn = mysql.connector.connect(host='teamup.czuxuaxnpu3e.us-east-2.rds.amazonaws.com',
+                                        database='innodb',
+                                        user='root',
+                                        password='rootroot')
+            cursor = conn.cursor()
+            cursor.execute(query, args)
+
+            if cursor.lastrowid:
+                print('last insert id', cursor.lastrowid)
+            else:
+                print('last insert id not found')
+
+            conn.commit()
+            
+            #if conn.is_connected():
+            #    print('Connected to MySQL database')
+ 
+        except Error as e:
+            print(e)
+ 
+        finally:
+                print("Connection closed")
+                cursor.close()
+                conn.close()
+
     return redirect(url_for("projects"))
 
 
 @app.route("/projects")
 def projects():
-    return render_template("layout.html")
+    try:
+        conn = mysql.connector.connect(host='teamup.czuxuaxnpu3e.us-east-2.rds.amazonaws.com',
+                                        database='innodb',
+                                        user='root',
+                                        password='rootroot')
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM project")
+        rows = cursor.fetchall()
+
+        print("Total Rows: ", cursor.rowcount)
+
+    except Error as e:
+        print(e)
+
+    finally:
+        cursor.close()
+        conn.close()
+    
+    return render_template("layout.html", projects=rows)
 
 
 @app.route("/submit")
@@ -34,4 +87,7 @@ def individual():
     if(request.method == 'GET'):
         print("Button")
     return render_template("individual-project.html")
+<<<<<<< HEAD
 
+=======
+>>>>>>> 426eb567955bb347de7239ca4b361a01ab6d3b95
