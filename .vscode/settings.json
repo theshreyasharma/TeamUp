@@ -1,9 +1,11 @@
 {
-    "python.pythonPath": "/usr/local/bin/python3",
+    "python.pythonPath": "C:\\Users\\Jacob\\.virtualenvs\\teamup-VJIrdKjP\\Scripts\\python.exe",
     "python.testing.pytestArgs": [
         "__pycache__"
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.nosetestsEnabled": false,
-    "python.testing.pytestEnabled": true
+    "python.testing.pytestEnabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": false
 }
