@@ -42,32 +42,33 @@ def home():
             print(e)
  
         finally:
-                print("Connection closed")
-                cursor.close()
-                conn.close()
+            print("Connection closed")
+            cursor.close()
+            conn.close()
 
     return redirect(url_for("projects"))
 
 
-@app.route("/projects")
+@app.route("/projects", methods=["GET"])
 def projects():
-    try:
+    if request.method == "GET":
         conn = mysql.connector.connect(host='teamup.czuxuaxnpu3e.us-east-2.rds.amazonaws.com',
-                                        database='innodb',
-                                        user='root',
-                                        password='rootroot')
+                                            database='innodb',
+                                            user='root',
+                                            password='rootroot')
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM project")
-        rows = cursor.fetchall()
+        try:
+            cursor.execute("SELECT * FROM project")
+            rows = cursor.fetchall()
 
-        print("Total Rows: ", cursor.rowcount)
+            print("Total Rows: ", cursor.rowcount)
 
-    except Error as e:
-        print(e)
+        except Error as e:
+            print(e)
 
-    finally:
-        cursor.close()
-        conn.close()
+        finally:
+            cursor.close()
+            conn.close()
     
     return render_template("layout.html", projects=rows)
 
@@ -86,5 +87,9 @@ def details():
 def individual():
     if(request.method == 'GET'):
         print("Button")
+<<<<<<< HEAD
     return render_template("individual-project.html")
     
+=======
+    return render_template("individual-project.html")
+>>>>>>> 26ac993001dc579451af78341f6b5baf262d29bb
