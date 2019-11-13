@@ -87,9 +87,11 @@ def details():
 def individual():
     if(request.method == 'GET'):
         print("Button")
-<<<<<<< HEAD
     return render_template("individual-project.html")
     
-=======
-    return render_template("individual-project.html")
->>>>>>> 26ac993001dc579451af78341f6b5baf262d29bb
+@app.route("/account")
+def new_account():
+    if(request.method = 'POST'):
+        name = request.form['name']
+        email = request.form['email']
+        password = request.form['password']

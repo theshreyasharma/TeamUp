@@ -14,9 +14,15 @@
             <h3>Create an Account.</h3> 
     </div>
 
-    <div class="card">
-            <h3>email</h3>
-            <p>username</p>
-            <p>password</p>
-            <p>confirm password</p>
+    <div class="form" action="/account" method="POST">
+            <form>
+                Name<br>
+                <input type="text" name="name" id="name" placeholder="John Smith"><br>
+                Email<br>
+                <input type="text" name="email" id="email" placeholder="someone@example.com"><br>
+                Set Password<br>
+                <input type="text" name="password" id="password" placeholder="******"><br> 
+                Submit<br>
+                <input type="submit" value="Submit">
+            </form>
     </div>
