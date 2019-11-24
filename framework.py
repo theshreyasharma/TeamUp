@@ -91,7 +91,12 @@ def individual():
     
 @app.route("/account")
 def new_account():
-    if(request.method = 'POST'):
+    if(request.method == 'POST'):
         name = request.form['name']
         email = request.form['email']
         password = request.form['password']
+    return redirect(url_for("made"))
+
+@app.route("/accountconfirmation")
+def account_confirmation():
+    render_template("accountconfirmation")
