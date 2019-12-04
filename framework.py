@@ -3,52 +3,6 @@ import mysql.connector
 from mysql.connector import Error
 app = Flask(__name__)
 
-@app.route("/")
-@app.route("/home", methods=['POST'])
-def home():
-    if(request.method == 'POST'):
-        print(request.get_json())
-        project_name = request.form['projectName']
-        project_description = request.form['projectDescription']
-        project_time = request.form['projectTime']
-        project_language = request.form['projectLanguages']
-
-        # TEMPORARILY REMOVED OWNER ID TO TEST CONNECTION
-        # ADD BACK WHEN USERS IMPLEMENTED
-        query = "INSERT INTO project(project_name,project_time,project_description,project_language)" \
-                "VALUES(%s,%s,%s,%s)"
-        args = (project_name, project_time, project_description, project_language)
-
-        conn = None
-        try:
-            conn = mysql.connector.connect(host='teamup.czuxuaxnpu3e.us-east-2.rds.amazonaws.com',
-                                        database='innodb',
-                                        user='root',
-                                        password='rootroot')
-            cursor = conn.cursor()
-            cursor.execute(query, args)
-
-            if cursor.lastrowid:
-                print('last insert id', cursor.lastrowid)
-            else:
-                print('last insert id not found')
-
-            conn.commit()
-            
-            #if conn.is_connected():
-            #    print('Connected to MySQL database')
- 
-        except Error as e:
-            print(e)
- 
-        finally:
-            print("Connection closed")
-            cursor.close()
-            conn.close()
-
-    return redirect(url_for("projects"))
-
-
 @app.route("/projects", methods=["GET"])
 def projects():
     if request.method == "GET":
@@ -91,7 +45,48 @@ def individual():
     
 @app.route("/account")
 def new_account():
-    if(request.method = 'POST'):
-        name = request.form['name']
-        email = request.form['email']
-        password = request.form['password']
+    return render_template("createaccount.html")
+
+@app.route("/create_post", methods=['POST'])
+def insert_new_project():
+    if request.method == "POST":
+        project_name = request.form['projectName']
+        project_description = request.form['projectDescription']
+        project_time = request.form['projectTime']
+        project_language = request.form['projectLanguages']
+
+        # TEMPORARILY REMOVED OWNER ID TO TEST CONNECTION
+        # ADD BACK WHEN USERS IMPLEMENTED
+        query = "INSERT INTO project(project_name,project_time,project_description,project_language)" \
+                "VALUES(%s,%s,%s,%s)"
+        args = (project_name, project_time, project_description, project_language)
+
+        conn = None
+        try:
+            conn = mysql.connector.connect(host='teamup.czuxuaxnpu3e.us-east-2.rds.amazonaws.com',
+                                        database='innodb',
+                                        user='root',
+                                        password='rootroot')
+            cursor = conn.cursor()
+            cursor.execute(query, args)
+
+            if cursor.lastrowid:
+                print('last insert id', cursor.lastrowid)
+            else:
+                print('last insert id not found')
+
+            conn.commit()
+            
+            #if conn.is_connected():
+            #    print('Connected to MySQL database')
+
+        except Error as e:
+            print(e)
+
+        finally:
+            print("Connection closed")
+            cursor.close()
+            conn.close()
+    return redirect(url_for("projects"))
+    
+
