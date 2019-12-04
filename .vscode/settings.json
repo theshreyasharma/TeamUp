@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "C:\\Users\\Jacob\\.virtualenvs\\teamup-VJIrdKjP\\Scripts\\python.exe",
+    "python.pythonPath": "/Users/shreyasharma/.local/share/virtualenvs/teamup-bNaKIPTm/bin/python",
     "python.testing.pytestArgs": [
         "__pycache__"
     ],
