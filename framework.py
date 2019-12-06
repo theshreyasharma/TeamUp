@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, url_for, redirect
 import mysql.connector
 from mysql.connector import Error
 app = Flask(__name__)
-
+@app.route("/")
 @app.route("/projects", methods=["GET"])
 def projects():
     if request.method == "GET":
@@ -47,7 +47,7 @@ def individual():
 def new_account():
     return render_template("createaccount.html")
 
-@app.route("/create_post", methods=['POST'])
+@app.route("/create_project_post", methods=['POST'])
 def insert_new_project():
     if request.method == "POST":
         project_name = request.form['projectName']
@@ -88,5 +88,35 @@ def insert_new_project():
             cursor.close()
             conn.close()
     return redirect(url_for("projects"))
-    
 
+@app.route("/create_web_user_post", methods=['POST'])
+def insert_new_web_user():
+    if request.method == "POST":
+        new_user_name = request.form.get("newUserName", False)
+        new_user_email = request.form.get("newUserEmail", False)
+        new_user_password = request.form.get("newUserPassword", False)
+
+        query = "INSERT INTO web_users(user_name, user_email, user_password)" \
+                "VALUES(%s, %s, %s)"
+        args = (new_user_name, new_user_email, new_user_password)
+        conn = None
+        try:
+            conn = mysql.connector.connect(host='teamup.czuxuaxnpu3e.us-east-2.rds.amazonaws.com',
+                                        database='innodb',
+                                        user='root',
+                                        password='rootroot')
+            cursor = conn.cursor()
+            cursor.execute(query, args)
+            if cursor.lastrowid:
+                print('last insert id', cursor.lastrowid)
+            else:
+                print('last insert id not found')
+
+            conn.commit()
+        except Error as e:
+            print(e)
+        finally:
+            print("Connection closed")
+            cursor.close()
+            conn.close()
+    return redirect(url_for("projects"))
