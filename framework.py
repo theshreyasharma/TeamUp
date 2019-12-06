@@ -36,6 +36,9 @@ def submit():
 def details():
     return redirect(url_for("individual"))
 
+@app.route("/signin")
+def signin():
+    return render_template("signin.html")
 
 @app.route("/individual")
 def individual():
