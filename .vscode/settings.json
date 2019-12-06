@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/Users/shreyasharma/.local/share/virtualenvs/teamup-bNaKIPTm/bin/python",
+    "python.pythonPath": "C:\\Users\\Jacob\\.virtualenvs\\teamup-VJIrdKjP\\Scripts\\python.exe",
     "python.testing.pytestArgs": [
         "__pycache__"
     ],
@@ -7,6 +7,6 @@
     "python.testing.nosetestsEnabled": false,
     "python.testing.pytestEnabled": true,
     "python.linting.flake8Enabled": true,
-    "python.linting.enabled": false,
+    "python.linting.enabled": true,
     "python.linting.pylintEnabled": false
 }
