@@ -26,6 +26,27 @@ def projects():
     
     return render_template("layout.html", projects=rows)
 
+@app.route("/join", methods=["GET"])
+def join_team():
+    if request.method == "GET":
+        conn = mysql.connector.connect(host='teamup.czuxuaxnpu3e.us-east-2.rds.amazonaws.com',
+                                            database='innodb',
+                                            user='root',
+                                            password='rootroot')
+        cursor = conn.cursor()
+        try:
+            cursor.execute("SELECT * FROM project")
+            rows = cursor.fetchall()
+
+            print("Total Rows: ", cursor.rowcount)
+
+        except Error as e:
+            print(e)
+        finally:
+            cursor.close()
+            conn.close()
+    return render_template("jointeam.html", projects=rows)
+
 
 @app.route("/submit")
 def submit():
