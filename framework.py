@@ -30,7 +30,7 @@ def projects():
     return render_template("layout.html", projects=rows)
 
 @app.route("/join", methods=["GET"])
-def join_team():
+def join():
     if request.method == "GET":
         conn = mysql.connector.connect(host='teamup.czuxuaxnpu3e.us-east-2.rds.amazonaws.com',
                                             database='innodb',
@@ -186,5 +186,9 @@ def insert_new_web_user():
             cursor.close()
             conn.close()
     return redirect(url_for("projects"))
+
+@app.route("/jointeam")
+def join_team():
+    return render_template("jointeam.html")
 
 
