@@ -155,6 +155,36 @@ def insert_new_project():
             conn.close()
     return redirect(url_for("projects"))
 
+@app.route("/join_team_post", methods=["POST"])
+def join_team_post():
+    if request.method == "POST":
+        selected = str(request.form.get("projectSelected"))
+
+        query = "INSERT INTO project_members(project_id, web_user_id)"\
+                "VALUES(%s, %s)"
+        args = (selected, session["name"])
+        conn = None
+
+        try:
+            conn = mysql.connector.connect(host='teamup.czuxuaxnpu3e.us-east-2.rds.amazonaws.com',
+                                        database='innodb',
+                                        user='root',
+                                        password='rootroot')
+            cursor = conn.cursor()
+            cursor.execute(query, args)
+            if cursor.lastrowid:
+                print('last insert id', cursor.lastrowid)
+            else:
+                print('last insert id not found')
+            conn.commit()
+        except Error as e:
+            print(e)
+        finally:
+            print("Connection closed")
+            cursor.close()
+            conn.close()
+    return redirect("/")
+
 @app.route("/create_web_user_post", methods=['POST'])
 def insert_new_web_user():
     if request.method == "POST":
