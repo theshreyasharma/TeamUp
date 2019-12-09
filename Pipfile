@@ -12,7 +12,6 @@ flake8 = "*"
 flask = "*"
 pylint = "*"
 mysql-connector = "*"
-flask-login = "*"
 
 [requires]
 python_version = "3.7"

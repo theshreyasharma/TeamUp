@@ -1,7 +1,10 @@
-from flask import Flask, request, render_template, url_for, redirect
+from flask import Flask, request, render_template, url_for, redirect, session
 import mysql.connector
 from mysql.connector import Error
+
 app = Flask(__name__)
+app.secret_key = "#d\xdd_\t2pD*?d\xd8\xb1\x90\x88d\x07g\x87\xc7\xfco\xf0\x88\x18L"
+
 @app.route("/")
 @app.route("/projects", methods=["GET"])
 def projects():
@@ -47,6 +50,44 @@ def join_team():
             conn.close()
     return render_template("jointeam.html", projects=rows)
 
+# Used to verify user upon logging in
+@app.route("/sign_in_get", methods=["POST"])
+def sign_in_get():
+    if request.method == "POST":
+        print("entered post")
+        conn = mysql.connector.connect(host='teamup.czuxuaxnpu3e.us-east-2.rds.amazonaws.com',
+                                            database='innodb',
+                                            user='root',
+                                            password='rootroot')
+        cursor = conn.cursor()
+        try:
+            sign_in_name = request.form.get("signInName", False)
+            sign_in_email = request.form.get("signInEmail", False)
+            sign_in_password = request.form.get("signInPassword", False)
+
+            print(sign_in_email)
+
+            cursor.execute("SELECT * FROM web_users WHERE user_name = %s AND user_password = %s", (sign_in_name, sign_in_password))
+            row = cursor.fetchall()
+            print(row)
+
+            # if user found, this info is now accesible on all other templates in session
+            if len(row) != 0:
+                print("is a user")
+                session["email"] = sign_in_email
+                session["name"] = sign_in_name
+                return redirect("/")
+            else:
+                print("Not a user")
+                return redirect("/signin")
+        except Error as e:
+            print(e)
+        finally:
+            cursor.close()
+            conn.close()
+    print("didnt enter get")
+    return redirect("/")
+                
 
 @app.route("/submit")
 def submit():
@@ -59,6 +100,7 @@ def details():
 
 @app.route("/signin")
 def signin():
+    
     return render_template("signin.html")
 
 @app.route("/individual")
@@ -144,3 +186,5 @@ def insert_new_web_user():
             cursor.close()
             conn.close()
     return redirect(url_for("projects"))
+
+
